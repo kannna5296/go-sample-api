@@ -13,3 +13,11 @@ https://qiita.com/massaaaaan/items/1b4b494b78cc77c69ec8#goenv%E3%81%AE%E3%82%A4%
 ここ参考にした
 
 goenv 2.1.5 を利用
+
+## ライブラリの理解
+
+- net/http
+  - https://pkg.go.dev/net/http
+  - http クライアント（リクエストを投げる時用）
+  - サーバ立て（リクエストを待ち受ける時用）
+    - ルーティングには go-chi とかをくっつけて使う？
