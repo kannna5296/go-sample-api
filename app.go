@@ -3,6 +3,8 @@ package main
 import (
     "fmt"
     "net/http"
+
+	"github.com/go-chi/chi/v5"
 )
 
 const baseMessage = "HELLO WORLD"
@@ -18,7 +20,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-  fmt.Printf("HTTPサーバ立ち上げ")
-  http.HandleFunc("/", handler)
+  r := chi.NewRouter()
+  r.Get("/handler", handler) //TODO POSTもできちゃう？
   http.ListenAndServe(":8080", nil)
 }
