@@ -5,8 +5,16 @@ import (
     "net/http"
 )
 
+const baseMessage = "HELLO WORLD"
+
 func handler(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprintf(w, "Hello World")
+	name := r.FormValue("name") //クエリパラメータ取得
+	if name == "" {
+		fmt.Fprintf(w, baseMessage) //ResponseWriterを渡してレスポンスを返す
+		return
+	}
+	
+	fmt.Fprintf(w, "%s, %s", baseMessage, name) //ResponseWriterを渡してレスポンスを返す
 }
 
 func main() {
