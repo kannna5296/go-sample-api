@@ -3,7 +3,7 @@ package main
 import (
     "fmt"
     "net/http"
-
+    // "log"
 	"github.com/go-chi/chi/v5"
 )
 
@@ -20,7 +20,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+//   log.Fatal("Application started.")
   r := chi.NewRouter()
-  r.Get("/handler", handler) //TODO POSTもできちゃう？
-  http.ListenAndServe(":8080", nil)
+  r.Get("/handler", handler)
+  http.ListenAndServe(":8080", r)
 }
