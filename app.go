@@ -6,8 +6,12 @@ import (
     "log"
 	"os"
 	"strconv"
-	// "github.com/jmoiron/sqlx"
+	"github.com/jmoiron/sqlx"
 	"github.com/go-chi/chi/v5"
+)
+
+var (
+	db    *sqlx.DB
 )
 
 const baseMessage = "HELLO WORLD"
@@ -56,11 +60,11 @@ func main() {
 	)
 	fmt.Println(dsn)
 
-	// db, err = sqlx.Open("mysql", dsn)
-	// if err != nil {
-	// 	log.Fatalf("Failed to connect to DB: %s.", err.Error())
-	// }
-	// defer db.Close()
+	db, err = sqlx.Open("mysql", dsn)
+	if err != nil {
+		log.Fatalf("Failed to connect to DB: %s.", err.Error())
+	}
+	defer db.Close()
   r := chi.NewRouter()
   r.Get("/handler", handler)
   http.ListenAndServe(":8080", r)
