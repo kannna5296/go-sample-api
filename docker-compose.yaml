@@ -1,13 +1,16 @@
-mysql:
-  container_name: docker_mysql
-  image: mysql:8.0
-  environment:
-    #- "TZ=Asia/Tokyo"
-    - "MYSQL_ROOT_HOST=%"
-    - "MYSQL_ROOT_PASSWORD=root"
-  volumes:
-    - mysql:/var/lib/mysql
-    - ./etc/my.cnf:/etc/my.cnf
-    - ./sql:/docker-entrypoint-initdb.d
-  ports:
-    - "3306:3306"
+services:
+  mysql:
+    container_name: local_mysql_container
+    image: mysql:8.0
+    environment:
+      #- "TZ=Asia/Tokyo"
+      - "MYSQL_ROOT_HOST=%"
+      - "MYSQL_ROOT_PASSWORD=root"
+    volumes:
+      - local_mysql_volume:/var/lib/mysql
+      - ./etc/my.cnf:/etc/my.cnf
+      - ./sql:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+volumes:
+  local_mysql_volume: # 名前付きボリュームを定義

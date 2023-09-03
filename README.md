@@ -22,8 +22,17 @@ goenv 2.1.5 を利用
   - サーバ立て（リクエストを待ち受ける時用）
     - ルーティングには go-chi とかをくっつけて使う？
 
-## Docker mysql ログイン
+## Docker まわり
+
+### mysql ログイン
 
 ```
 docker exec -ti docker_mysql mysql -u root -p
+```
+
+### initdb 流し直したい時
+
+```
+docker-compose down --volume //Volumeも消す
+
 ```
