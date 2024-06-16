@@ -22,11 +22,6 @@ func main() {
   e.Logger.Fatal(e.Start(":1323"))
 }
 
-// ハンドラーを定義
-func hello(c echo.Context) error {
-  return c.String(http.StatusOK, "Hello, World!")
-}
-
 func bookDetail(c echo.Context) error {
 	// DBとかイイので一旦ゴリ押してResponseをJSON表現
 	res := BookDetailResponse{
