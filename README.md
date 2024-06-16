@@ -36,3 +36,47 @@ docker exec -ti docker_mysql mysql -u root -p
 docker-compose down --volume //Volumeも消す
 
 ```
+
+
+
+
+・スライスと配列の違い
+・VSCodeでの開発体験について（Golandのようが良い？
+・Field名、大文字始まりにしとくのが無難そう　https://vtc.hatenablog.com/entry/2022/03/27/120505
+
+・「クラス」と「構造体」の違い
+
+
+## JSON構造体の定義
+
+```
+	res := BookDetailResponse{
+		Id: "1", 
+		Name:"hoge",
+		Author: "HOGEHOGE", 
+		CanRental: true, 
+		Rentals: []BookDetailRentalResponse {
+			{
+				UserId: "11",
+				RentedAt: time.Now(), 
+				Deadline: time.Now(), 
+				Returned: false,
+			},
+		},
+	}
+
+  type BookDetailResponse struct {
+	Id string `json:"id"`
+	Name string `json:"name"`
+	Author string `json:"author"`
+	CanRental bool `json:"canRental"`
+	Rentals []BookDetailRentalResponse `json:"rentals"`
+}
+
+type BookDetailRentalResponse struct {
+	UserId string `json:"userId"`
+	RentedAt time.Time `json:"rentedAt"`
+	Deadline time.Time `json:"deadline"`
+	Returned bool `json:"returned"`
+}
+```
