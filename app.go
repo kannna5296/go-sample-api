@@ -1,32 +1,35 @@
 package main
 
 import (
-    "fmt"
-	"os"
+	"log"
     "net/http"
-	"github.com/jmoiron/sqlx"
-	"github.com/go-chi/chi/v5"
-)
-
-var (
-	db    *sqlx.DB
+	"encoding/json"
 )
 
 const baseMessage = "HELLO WORLD"
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	name := r.FormValue("name") //クエリパラメータ取得
-	if name == "" {
-		fmt.Fprintf(w, baseMessage) //ResponseWriterを渡してレスポンスを返す
-		return
-	}
-	
-	fmt.Fprintf(w, "%s, %s", baseMessage, name) //ResponseWriterを渡してレスポンスを返す
+	// name := r.FormValue("name") //クエリパラメータ取得
+	u := User{ Id : 1, Name : "Thome", Email : "thome@example.com"}
+    json, err := json.Marshal(u)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    w.Header().Set("Content-Type", "application/json; charset=utf-8")
+    w.Write(json)
 }
 
 func main() {
-  fmt.Print(os.Getppid())
-  r := chi.NewRouter()
-  r.Get("/handler", handler)
-  http.ListenAndServe(":8080", r)
+    http.HandleFunc("/", handler)
+    err := http.ListenAndServe(":8080", nil)
+    if err != nil {
+        log.Fatal("Error ListenAndServe : ", err)
+    }
+}
+
+type User struct {
+	Id int `json:"id"`
+	Name string `json:"name"`
+	Email string `json:"email"`
 }
