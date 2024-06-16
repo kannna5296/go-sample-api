@@ -37,29 +37,32 @@ docker-compose down --volume //Volumeも消す
 
 ```
 
+## 色々めも
 
+- スライスと配列の違い
+- VSCode での開発体験について（Goland のようが良い？
+- Field 名、大文字始まりにしとくのが無難そう　https://vtc.hatenablog.com/entry/2022/03/27/120505
 
+- 「クラス」と「構造体」の違い
 
-・スライスと配列の違い
-・VSCodeでの開発体験について（Golandのようが良い？
-・Field名、大文字始まりにしとくのが無難そう　https://vtc.hatenablog.com/entry/2022/03/27/120505
+- FW が多くてむずい。とりあえず Echo を選択してみる（ISUCON で使われてたから）
+- 後基本的にライブラリも多い印象...（Java/Kotlin が塊すぎっていうのもあるかもだが
 
-・「クラス」と「構造体」の違い
+- 環境変数使い方　https://zenn.dev/kurusugawa/articles/golang-env-lib
 
-
-## JSON構造体の定義
+## JSON 構造体の定義
 
 ```
 	res := BookDetailResponse{
-		Id: "1", 
+		Id: "1",
 		Name:"hoge",
-		Author: "HOGEHOGE", 
-		CanRental: true, 
+		Author: "HOGEHOGE",
+		CanRental: true,
 		Rentals: []BookDetailRentalResponse {
 			{
 				UserId: "11",
-				RentedAt: time.Now(), 
-				Deadline: time.Now(), 
+				RentedAt: time.Now(),
+				Deadline: time.Now(),
 				Returned: false,
 			},
 		},
