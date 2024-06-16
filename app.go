@@ -1,35 +1,27 @@
 package main
 
 import (
-	"log"
-    "net/http"
-	"encoding/json"
+	"net/http"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
-const baseMessage = "HELLO WORLD"
-
-func handler(w http.ResponseWriter, r *http.Request) {
-	// name := r.FormValue("name") //クエリパラメータ取得
-	u := User{ Id : 1, Name : "Thome", Email : "thome@example.com"}
-    json, err := json.Marshal(u)
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    w.Header().Set("Content-Type", "application/json; charset=utf-8")
-    w.Write(json)
-}
-
 func main() {
-    http.HandleFunc("/", handler)
-    err := http.ListenAndServe(":8080", nil)
-    if err != nil {
-        log.Fatal("Error ListenAndServe : ", err)
-    }
+  // インスタンスを作成
+  e := echo.New()
+
+  // ミドルウェアを設定
+  e.Use(middleware.Logger())
+  e.Use(middleware.Recover())
+
+  // ルートを設定
+  e.GET("/", hello) // ローカル環境の場合、http://localhost:1323/ にGETアクセスされるとhelloハンドラーを実行する
+
+  // サーバーをポート番号1323で起動
+  e.Logger.Fatal(e.Start(":1323"))
 }
 
-type User struct {
-	Id int `json:"id"`
-	Name string `json:"name"`
-	Email string `json:"email"`
+// ハンドラーを定義
+func hello(c echo.Context) error {
+  return c.String(http.StatusOK, "Hello, World!")
 }
